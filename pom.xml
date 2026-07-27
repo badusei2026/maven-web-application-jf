@@ -105,13 +105,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>DataPandas Releases Nexus Repository</name>
-	      <url>http://18.170.118.81:8081/repository/nationwide-release/</url>
+	      <url>http://3.95.30.120:8081/repository/barclays-Release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>DataPandas Snapshot Nexus Repository  for Nationwide</name>
-	      <url>http://18.170.118.81:8081/repository/nationwide-snapshot/</url>
+	      <url>http://3.95.30.120:8081/repository/barclays-Snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
