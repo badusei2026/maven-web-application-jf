@@ -1,0 +1,46 @@
+pipeline {
+	agent any
+	tools {
+	   maven "Maven394"
+	   // def mavenHome = tool name: "maven394"
+  }
+	 stages{
+	        stage ("1GetCode"){
+	                steps{
+		                git branch: 'main', url: 'https://github.com/badusei2026/maven-web-application-jf.git'
+	                 }
+	        }
+	       stage ("2CleanTargetDirectory"){
+                    steps{
+	                    sh "mvn clean"
+	                 }
+        	}
+	         stage ("3TestTargetDirectory"){
+	                steps{
+	                    sh "mvn test"
+	                 }
+        	}
+	        stage ("4PackageTargetDirectory"){
+                    steps{
+	                    sh "mvn package"
+	                }
+	          }
+	          stage ("5CodeQaulityAnalysis"){
+                    steps{
+	                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar"
+	                }
+	          }
+	          stage ("6DeployToContainer"){
+                    steps{
+	                    sh "mvn deploy"
+	                }
+	          }
+	          stage ("7DeployToTomcat"){
+                    steps{
+	                   deploy adapters: [tomcat9(credentialsId: 'Barclays', path: '', url: 'http://18.206.118.204:8080/')], contextPath: null, war: 'target/*war'
+                 
+                     }
+                   }
+	 }
+ }
+	       
